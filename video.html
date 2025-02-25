@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Player - YouTube (2020)</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <button class="menu-btn"><i class="fas fa-bars"></i></button>
+                <div class="logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/YouTube_Logo_2017.svg/1280px-YouTube_Logo_2017.svg.png" alt="YouTube" class="logo-img">
+                </div>
+            </div>
+            <div class="search-container">
+                <form class="search-form" id="search-form">
+                    <input type="text" placeholder="Search" id="search-input">
+                    <button type="submit"><i class="fas fa-search"></i></button>
+                </form>
+                <button class="mic-btn"><i class="fas fa-microphone"></i></button>
+            </div>
+            <div class="header-right">
+                <button class="icon-btn"><i class="fas fa-video"></i></button>
+                <button class="icon-btn"><i class="fas fa-th"></i></button>
+                <button class="icon-btn"><i class="fas fa-bell"></i></button>
+                <button class="profile-btn">M</button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="content">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <nav>
+                    <ul>
+                        <li class="active"><i class="fas fa-home"></i> <span>Home</span></li>
+                        <li><i class="fas fa-compass"></i> <span>Explore</span></li>
+                        <li><i class="fas fa-folder"></i> <span>Subscriptions</span></li>
+                        <li class="divider"></li>
+                        <li><i class="fas fa-play-circle"></i> <span>Library</span></li>
+                        <li><i class="fas fa-history"></i> <span>History</span></li>
+                        <li><i class="fas fa-clock"></i> <span>Watch later</span></li>
+                        <li><i class="fas fa-thumbs-up"></i> <span>Liked videos</span></li>
+                        <li class="divider"></li>
+                        <li class="sidebar-heading">SUBSCRIPTIONS</li>
+                        <li class="channel"><i class="fas fa-user-circle"></i> <span>Channel 1</span></li>
+                        <li class="channel"><i class="fas fa-user-circle"></i> <span>Channel 2</span></li>
+                        <li class="channel"><i class="fas fa-user-circle"></i> <span>Channel 3</span></li>
+                        <li class="channel"><i class="fas fa-user-circle"></i> <span>Channel 4</span></li>
+                        <li><i class="fas fa-chevron-down"></i> <span>Show more</span></li>
+                        <li class="divider"></li>
+                        <li class="sidebar-heading">MORE FROM YOUTUBE</li>
+                        <li><i class="fab fa-youtube"></i> <span>YouTube Premium</span></li>
+                        <li><i class="fas fa-film"></i> <span>Movies & Shows</span></li>
+                        <li><i class="fas fa-gamepad"></i> <span>Gaming</span></li>
+                        <li><i class="fas fa-broadcast-tower"></i> <span>Live</span></li>
+                        <li class="divider"></li>
+                        <li><i class="fas fa-cog"></i> <span>Settings</span></li>
+                        <li><i class="fas fa-flag"></i> <span>Report history</span></li>
+                        <li><i class="fas fa-question-circle"></i> <span>Help</span></li>
+                        <li><i class="fas fa-exclamation-circle"></i> <span>Send feedback</span></li>
+                    </ul>
+                </nav>
+                <div class="footer">
+                    <div class="footer-links">
+                        <a href="#">About</a>
+                        <a href="#">Press</a>
+                        <a href="#">Copyright</a>
+                        <a href="#">Contact us</a>
+                        <a href="#">Creators</a>
+                        <a href="#">Advertise</a>
+                        <a href="#">Developers</a>
+                    </div>
+                    <div class="footer-links">
+                        <a href="#">Terms</a>
+                        <a href="#">Privacy</a>
+                        <a href="#">Policy & Safety</a>
+                        <a href="#">How YouTube works</a>
+                        <a href="#">Test new features</a>
+                    </div>
+                    <div class="copyright">
+                        &copy; 2020 Google LLC
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main area -->
+            <main class="main-content">
+                <button class="back-button" id="backToHome"><i class="fas fa-arrow-left"></i> Back to Home</button>
+                
+                <div class="video-player-container" id="videoPlayerContainer">
+                    <div class="video-player-content">
+                        <div class="primary-content">
+                            <div class="player-wrapper">
+                                <iframe id="videoIframe" class="video-iframe" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                            
+                            <div class="video-title-container">
+                                <h1 class="video-full-title" id="videoTitle">Video Title</h1>
+                                <div class="video-stats-line">
+                                    <span id="videoViewsDate">0 views • </span>
+                                    <div class="video-rating">
+                                        <span id="videoLikes">0</span> <i class="fas fa-thumbs-up"></i> · 
+                                        <span id="videoDislikes">0</span> <i class="fas fa-thumbs-down"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="video-actions">
+                                <button class="action-button"><i class="fas fa-thumbs-up"></i> LIKE</button>
+                                <button class="action-button"><i class="fas fa-thumbs-down"></i> DISLIKE</button>
+                                <button class="action-button"><i class="fas fa-share"></i> SHARE</button>
+                                <button class="action-button"><i class="fas fa-save"></i> SAVE</button>
+                                <button class="action-button"><i class="fas fa-ellipsis-h"></i></button>
+                            </div>
+                            
+                            <div class="video-channel">
+                                <div class="channel-info">
+                                    <div class="channel-avatar" id="channelAvatar">
+                                        <!-- Channel avatar will be set dynamically -->
+                                    </div>
+                                    <div class="channel-details">
+                                        <h3 id="channelName">Channel Name</h3>
+                                        <p id="channelSubs">0 subscribers</p>
+                                    </div>
+                                </div>
+                                <button class="subscribe-button">SUBSCRIBE</button>
+                            </div>
+                            
+                            <div class="video-description">
+                                <div class="description-text" id="videoDescription">
+                                    Video description will appear here.
+                                </div>
+                                <div class="show-more">SHOW MORE</div>
+                            </div>
+                            
+                            <div class="comments-section">
+                                <div class="comments-header">
+                                    <div class="comments-count" id="commentCount">0 Comments</div>
+                                    <div class="comment-sort">
+                                        <i class="fas fa-sort"></i> SORT BY
+                                    </div>
+                                </div>
+                                
+                                <div class="add-comment">
+                                    <div class="user-avatar">M</div>
+                                    <input type="text" class="comment-input" placeholder="Add a public comment...">
+                                </div>
+                                
+                                <div id="commentsContainer">
+                                    <!-- Comments will be loaded here -->
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="suggested-videos" id="suggestedVideos">
+                            <!-- Suggested videos will be loaded here -->
+                            <div class="loading-indicator">
+                                <div class="spinner"></div>
+                                <p>Loading suggested videos...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- YouTube API -->
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script src="script.js"></script>
+    <script src="video-player.js"></script>
+</body>
+</html>

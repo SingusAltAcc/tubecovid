@@ -1,0 +1,179 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube (2020)</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <button class="menu-btn"><i class="fas fa-bars"></i></button>
+                <div class="logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/YouTube_Logo_2017.svg/1280px-YouTube_Logo_2017.svg.png" alt="YouTube" class="logo-img">
+                </div>
+            </div>
+            <div class="search-container">
+                <form class="search-form" id="search-form">
+                    <input type="text" placeholder="Search" id="search-input">
+                    <button type="submit"><i class="fas fa-search"></i></button>
+                </form>
+                <button class="mic-btn"><i class="fas fa-microphone"></i></button>
+            </div>
+            <div class="header-right">
+                <button class="icon-btn"><i class="fas fa-video"></i></button>
+                <button class="icon-btn"><i class="fas fa-th"></i></button>
+                <button class="icon-btn"><i class="fas fa-bell"></i></button>
+                <button class="profile-btn">M</button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="content">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <nav>
+                    <ul>
+                        <li class="active"><i class="fas fa-home"></i> <span>Home</span></li>
+                        <li><i class="fas fa-compass"></i> <span>Explore</span></li>
+                        <li><i class="fas fa-folder"></i> <span>Subscriptions</span></li>
+                        <li class="divider"></li>
+                        <li><i class="fas fa-play-circle"></i> <span>Library</span></li>
+                        <li><i class="fas fa-history"></i> <span>History</span></li>
+                        <li><i class="fas fa-clock"></i> <span>Watch later</span></li>
+                        <li><i class="fas fa-thumbs-up"></i> <span>Liked videos</span></li>
+                        <li class="divider"></li>
+                        <li class="sidebar-heading">SUBSCRIPTIONS</li>
+                        <li class="channel"><i class="fas fa-user-circle"></i> <span>Channel 1</span></li>
+                        <li class="channel"><i class="fas fa-user-circle"></i> <span>Channel 2</span></li>
+                        <li class="channel"><i class="fas fa-user-circle"></i> <span>Channel 3</span></li>
+                        <li class="channel"><i class="fas fa-user-circle"></i> <span>Channel 4</span></li>
+                        <li><i class="fas fa-chevron-down"></i> <span>Show more</span></li>
+                        <li class="divider"></li>
+                        <li class="sidebar-heading">MORE FROM YOUTUBE</li>
+                        <li><i class="fab fa-youtube"></i> <span>YouTube Premium</span></li>
+                        <li><i class="fas fa-film"></i> <span>Movies & Shows</span></li>
+                        <li><i class="fas fa-gamepad"></i> <span>Gaming</span></li>
+                        <li><i class="fas fa-broadcast-tower"></i> <span>Live</span></li>
+                        <li class="divider"></li>
+                        <li><i class="fas fa-cog"></i> <span>Settings</span></li>
+                        <li><i class="fas fa-flag"></i> <span>Report history</span></li>
+                        <li><i class="fas fa-question-circle"></i> <span>Help</span></li>
+                        <li><i class="fas fa-exclamation-circle"></i> <span>Send feedback</span></li>
+                    </ul>
+                </nav>
+                <div class="footer">
+                    <div class="footer-links">
+                        <a href="#">About</a>
+                        <a href="#">Press</a>
+                        <a href="#">Copyright</a>
+                        <a href="#">Contact us</a>
+                        <a href="#">Creators</a>
+                        <a href="#">Advertise</a>
+                        <a href="#">Developers</a>
+                    </div>
+                    <div class="footer-links">
+                        <a href="#">Terms</a>
+                        <a href="#">Privacy</a>
+                        <a href="#">Policy & Safety</a>
+                        <a href="#">How YouTube works</a>
+                        <a href="#">Test new features</a>
+                    </div>
+                    <div class="copyright">
+                        &copy; 2020 Google LLC
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main area -->
+            <main class="main-content">
+                <!-- API Key Input Modal -->
+                <div id="apiKeyModal" class="api-key-modal">
+                    <div class="api-key-container">
+                        <h2>YouTube Data API Key Required</h2>
+                        <p>To display videos, please enter your YouTube Data API v3 key.</p>
+                        <p class="api-key-instructions">You can obtain an API key from the <a href="https://console.developers.google.com/" target="_blank">Google Developer Console</a>.</p>
+                        <div class="api-key-form">
+                            <input type="text" id="apiKeyInput" placeholder="Enter your API key">
+                            <button id="submitApiKey">Submit</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Categories -->
+                <div class="categories">
+                    <button class="category active" data-category="all">All</button>
+                    <button class="category" data-category="music">Music</button>
+                    <button class="category" data-category="gaming">Gaming</button>
+                    <button class="category" data-category="news">News</button>
+                    <button class="category" data-category="comedy">Comedy</button>
+                    <button class="category" data-category="cooking">Cooking</button>
+                    <button class="category" data-category="education">Education</button>
+                    <button class="category" data-category="science">Science</button>
+                    <button class="category" data-category="technology">Technology</button>
+                </div>
+
+                <!-- Video grid -->
+                <div class="video-section">
+                    <div class="video-grid" id="recommended-videos">
+                        <div class="loading-indicator">
+                            <div class="spinner"></div>
+                            <p>Loading videos...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trending section -->
+                <div class="video-section">
+                    <h2 class="section-title">Trending</h2>
+                    <div class="video-grid" id="trending-videos">
+                        <div class="loading-indicator">
+                            <div class="spinner"></div>
+                            <p>Loading trending videos...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COVID-19 Banner -->
+                <div class="covid-banner">
+                    <div class="covid-logo">CDC</div>
+                    <div class="covid-info">
+                        <strong>COVID-19 news and updates</strong>
+                        <p>Get the latest information from the CDC about COVID-19.</p>
+                    </div>
+                    <button class="learn-more-btn">LEARN MORE</button>
+                </div>
+
+                <!-- More video sections -->
+                <div class="video-section">
+                    <h2 class="section-title">News</h2>
+                    <div class="video-grid" id="news-videos">
+                        <div class="loading-indicator">
+                            <div class="spinner"></div>
+                            <p>Loading news videos...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-section">
+                    <h2 class="section-title">From creators you might like</h2>
+                    <div class="video-grid" id="creator-videos">
+                        <div class="loading-indicator">
+                            <div class="spinner"></div>
+                            <p>Loading creator videos...</p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- YouTube API -->
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
