@@ -66,9 +66,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         // Add event listener to reset API key button
-        document.getElementById('resetApiKey').addEventListener('click', function() {
-            apiKeyModal.style.display = 'flex';
-        });
+        const resetButton = document.getElementById('resetApiKey');
+        if (resetButton) {
+            resetButton.addEventListener('click', function() {
+                if (apiKeyModal) apiKeyModal.style.display = 'flex';
+            });
+        }
     }
     
     // Function to format view counts

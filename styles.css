@@ -130,37 +130,6 @@ body {
     cursor: pointer;
 }
 
-/* Browser Alert */
-.browser-alert {
-    background-color: #fff9c4;
-    padding: 12px 16px;
-    display: flex;
-    align-items: center;
-    font-size: 13px;
-    color: #333;
-    border-bottom: 1px solid #f0e6b2;
-}
-
-.browser-alert i {
-    color: #f4b400;
-    margin-right: 8px;
-}
-
-.browser-alert a {
-    color: #065fd4;
-    text-decoration: none;
-    margin: 0 4px;
-}
-
-.close-alert {
-    margin-left: auto;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 18px;
-    color: #606060;
-}
-
 /* Main content layout */
 .content {
     display: flex;

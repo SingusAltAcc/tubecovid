@@ -20,15 +20,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Set up browser alert close functionality
-    const browserAlert = document.getElementById('browserAlert');
-    const closeAlert = document.getElementById('closeAlert');
-    if (browserAlert && closeAlert) {
-        closeAlert.addEventListener('click', function() {
-            browserAlert.style.display = 'none';
-        });
-    }
-    
     // Check if API key exists
     let apiKey = localStorage.getItem('youtubeApiKey');
     
