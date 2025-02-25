@@ -20,6 +20,15 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // Set up browser alert close functionality
+    const browserAlert = document.getElementById('browserAlert');
+    const closeAlert = document.getElementById('closeAlert');
+    if (browserAlert && closeAlert) {
+        closeAlert.addEventListener('click', function() {
+            browserAlert.style.display = 'none';
+        });
+    }
+    
     // Check if API key exists
     let apiKey = localStorage.getItem('youtubeApiKey');
     
@@ -127,8 +136,19 @@ document.addEventListener('DOMContentLoaded', function() {
         const videoViewsDate = document.getElementById('videoViewsDate');
         if (videoViewsDate) {
             const views = parseInt(video.statistics.viewCount).toLocaleString();
-            const publishDate = formatPublishDate(video.snippet.publishedAt);
-            videoViewsDate.textContent = `${views} views • ${publishDate}`;
+            videoViewsDate.textContent = `${views} views`;
+        }
+        
+        // Set publish date
+        const publishDate = document.getElementById('publishDate');
+        if (publishDate) {
+            const date = new Date(video.snippet.publishedAt);
+            const formattedDate = date.toLocaleDateString('en-US', { 
+                month: 'short', 
+                day: 'numeric', 
+                year: 'numeric' 
+            });
+            publishDate.textContent = `Published on ${formattedDate}`;
         }
         
         // Set likes and dislikes

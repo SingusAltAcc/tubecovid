@@ -6,23 +6,25 @@ document.addEventListener('DOMContentLoaded', function() {
     const submitApiKeyBtn = document.getElementById('submitApiKey');
     
     // Show API key modal if no key is stored
-    if (!apiKey) {
+    if (!apiKey && apiKeyModal) {
         apiKeyModal.style.display = 'flex';
-    } else {
+    } else if (apiKey) {
         initializeYouTubeAPI(apiKey);
     }
     
     // Handle API key submission
-    submitApiKeyBtn.addEventListener('click', function() {
-        const inputKey = apiKeyInput.value.trim();
-        if (inputKey) {
-            localStorage.setItem('youtubeApiKey', inputKey);
-            apiKeyModal.style.display = 'none';
-            initializeYouTubeAPI(inputKey);
-        } else {
-            alert('Please enter a valid API key');
-        }
-    });
+    if (submitApiKeyBtn) {
+        submitApiKeyBtn.addEventListener('click', function() {
+            const inputKey = apiKeyInput.value.trim();
+            if (inputKey) {
+                localStorage.setItem('youtubeApiKey', inputKey);
+                apiKeyModal.style.display = 'none';
+                initializeYouTubeAPI(inputKey);
+            } else {
+                alert('Please enter a valid API key');
+            }
+        });
+    }
     
     // Function to initialize the YouTube API
     function initializeYouTubeAPI(key) {
