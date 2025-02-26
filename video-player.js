@@ -110,7 +110,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }).catch(function(error) {
             console.error('Error fetching video data', error);
-            showVideoError('Failed to load video data. ' + error.message);
+            // Fix for undefined error message
+            const errorMessage = error && error.message ? error.message : 'An unknown error occurred';
+            showVideoError('Failed to load video data: ' + errorMessage);
         });
     }
     
@@ -127,7 +129,13 @@ document.addEventListener('DOMContentLoaded', function() {
         const videoViewsDate = document.getElementById('videoViewsDate');
         if (videoViewsDate) {
             const views = parseInt(video.statistics.viewCount).toLocaleString();
-            videoViewsDate.textContent = `${views} views`;
+            const date = new Date(video.snippet.publishedAt);
+            const formattedDate = date.toLocaleDateString('en-US', { 
+                month: 'short', 
+                day: 'numeric', 
+                year: 'numeric' 
+            });
+            videoViewsDate.textContent = `${views} views • ${formattedDate}`;
         }
         
         // Set publish date
@@ -194,6 +202,11 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Need to get the full video details for the related videos
         const videoIds = videos.map(video => video.id.videoId).join(',');
+        
+        if (!videoIds) {
+            suggestedVideos.innerHTML = '<p>No related videos found.</p>';
+            return;
+        }
         
         gapi.client.youtube.videos.list({
             part: 'snippet,statistics,contentDetails',
@@ -269,15 +282,28 @@ document.addEventListener('DOMContentLoaded', function() {
         
         let html = '';
         
+        if (!comments || comments.length === 0) {
+            commentsContainer.innerHTML = '<p>No comments found for this video.</p>';
+            return;
+        }
+        
         comments.forEach(thread => {
+            if (!thread.snippet || !thread.snippet.topLevelComment || !thread.snippet.topLevelComment.snippet) {
+                return;
+            }
+            
             const comment = thread.snippet.topLevelComment.snippet;
             const likeCount = parseInt(comment.likeCount || 0);
             const publishDate = formatPublishDate(comment.publishedAt);
             
+            // Use the actual author profile image from the API
+            const authorProfileImage = comment.authorProfileImageUrl || '';
+            
             html += `
                 <div class="comment">
                     <div class="comment-avatar">
-                        <img src="${comment.authorProfileImageUrl}" alt="${comment.authorDisplayName}">
+                        <img src="${authorProfileImage}" alt="${comment.authorDisplayName}" 
+                             onerror="this.src='data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\'><rect width=\'40\' height=\'40\' fill=\'%23e5e5e5\'/></svg>'">
                     </div>
                     <div class="comment-content">
                         <div class="comment-header">
@@ -335,11 +361,15 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function formatDuration(duration) {
         // PT1H24M33S -> 1:24:33
-        let match = duration.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
+        // Handle invalid or missing duration
+        if (!duration) return '0:00';
         
-        let hours = (match[1]) ? match[1].replace('H', '') : 0;
-        let minutes = (match[2]) ? match[2].replace('M', '') : 0;
-        let seconds = (match[3]) ? match[3].replace('S', '') : 0;
+        let match = duration.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
+        if (!match) return '0:00';
+        
+        let hours = (match[1]) ? parseInt(match[1].replace('H', '')) : 0;
+        let minutes = (match[2]) ? parseInt(match[2].replace('M', '')) : 0;
+        let seconds = (match[3]) ? parseInt(match[3].replace('S', '')) : 0;
         
         // Pad with leading zeros if needed
         if (seconds < 10) seconds = '0' + seconds;

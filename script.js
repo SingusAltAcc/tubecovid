@@ -146,10 +146,30 @@ document.addEventListener('DOMContentLoaded', function() {
                              (snippet.thumbnails.medium ? snippet.thumbnails.medium.url : 
                              snippet.thumbnails.default.url);
         
-        // Generate a random color for the channel avatar if no image is available
-        const colors = ['#FFC107', '#4CAF50', '#2196F3', '#9C27B0', '#E91E63', '#FF5722', '#795548', '#8BC34A'];
-        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+        const channelId = snippet.channelId;
+        let channelAvatarHtml = `<div class="creator-avatar" style="background-color: #e5e5e5"></div>`;
         
+        // Fetch channel data to get thumbnail
+        if (channelId) {
+            gapi.client.youtube.channels.list({
+                part: 'snippet',
+                id: channelId
+            }).then(response => {
+                if (response.result.items && response.result.items.length > 0) {
+                    const channel = response.result.items[0];
+                    const thumbnail = channel.snippet.thumbnails.default.url;
+                    const avatarElement = document.querySelector(`[data-channel-id="${channelId}"]`);
+                    if (avatarElement) {
+                        avatarElement.innerHTML = `<img src="${thumbnail}" alt="${snippet.channelTitle}">`;
+                    }
+                }
+            }).catch(error => {
+                console.error('Error fetching channel thumbnail', error);
+            });
+            
+            channelAvatarHtml = `<div class="creator-avatar" data-channel-id="${channelId}"></div>`;
+        }
+
         return `
             <div class="video-card" data-video-id="${videoId}">
                 <div class="thumbnail">
@@ -157,11 +177,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="video-duration">${duration}</div>
                 </div>
                 <div class="video-info">
-                    <div class="creator-avatar" style="background-color: ${randomColor}">
-                        ${snippet.channelId ? 
-                          `<img src="https://i.pravatar.cc/150?u=${snippet.channelId}" alt="${snippet.channelTitle}">` : 
-                          ''}
-                    </div>
+                    ${channelAvatarHtml}
                     <div class="video-details">
                         <h3 class="video-title">${snippet.title}</h3>
                         <p class="video-creator">${snippet.channelTitle}</p>
